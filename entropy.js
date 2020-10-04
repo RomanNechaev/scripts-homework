@@ -25,7 +25,7 @@ if (n>1) {
 	h/= Math.log2(n);
 	console.log(h);
 }
-if (inText==''){
+else if (inText==''){
 	console.log('Файл пустой!')
 }	
 else
