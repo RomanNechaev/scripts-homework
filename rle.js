@@ -19,21 +19,6 @@ function codestr(inText){
 	}
 	return resStr;
 }
-function decodestr(inText){
-	let resStr = '';
-	for (let i = 0; i < Buffer.byteLength(inText); i++){
-		if (inText[i] == '#'){
-			let count = inText[i+1].charCodeAt(0);
-			for (let j = 0; j < count; j++)
-				resStr+=inText[i+2];
-			i+=2;
-		}
-		else
-			resStr+=inText[i];
-	}
-	return resStr;
-}
-/*
 function decodestr(Intext) {
 	let alph = '';
 	for (let i = 0; i <= 255; i++)
@@ -52,15 +37,16 @@ function decodestr(Intext) {
 	}
 	return resStr;
 };
-*/
 let fs = require('fs');
 let file = fs.readFileSync(process.argv[3], 'utf8');
 let outFile = process.argv[4];
 let outString;
 if (process.argv[2] == 'code')
 	outString = codestr(file);
-else 
+else if (process.argv[2] == 'decode')
 	outString = decodestr(file);
+else
+	console.log('Function not found');
 fs.writeFileSync(outFile, outString);
 
 
