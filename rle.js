@@ -1,4 +1,4 @@
-function codestr(inText){
+function codeStr(inText){
 	let i = 0, n = 1;
 	let resStr = '';
 	while (i < inText.length){
@@ -19,7 +19,7 @@ function codestr(inText){
 	}
 	return resStr;
 }
-function decodestr(Intext) {
+function decodeStr(Intext) {
 	let alph = '';
 	for (let i = 0; i <= 255; i++)
 		alph += String.fromCharCode(i);
@@ -42,9 +42,9 @@ let file = fs.readFileSync(process.argv[3], 'utf8');
 let outFile = process.argv[4];
 let outString;
 if (process.argv[2] == 'code')
-	outString = codestr(file);
+	outString = codeStr(file);
 else if (process.argv[2] == 'decode')
-	outString = decodestr(file);
+	outString = decodeStr(file);
 else
 	console.log('Function not found');
 fs.writeFileSync(outFile, outString);
