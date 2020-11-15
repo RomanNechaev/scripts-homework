@@ -1,0 +1,79 @@
+<html>
+<head>
+	<title>hemmeing code</title>
+	<script>
+	function code(){
+	let mes = document.getElementById('inpMessage').value;
+	mes = mes.split('');
+	for(let i = 0; i < mes.length; i++)
+		mes[i] *= 1;
+	let control = new Array();
+	control.push((mes[0] + mes[1] + mes[2])%2);
+	control.push((mes[0] + mes[1] + mes[3])%2);
+	control.push((mes[0] + mes[2] + mes[3])%2);
+	let vector1 = mes.join('') + control.join('');
+	document.getElementById('codedMessage').value = vector1;
+}
+function decode(){
+	
+	let mes2 = document.getElementById('codedMessage').value;
+	let mes3 = new Array();
+	for(let i = 0; i < mes2.length; i++) {
+		if (mes2[i]=='1')
+		{
+			mes3.push(1);
+		}
+		else
+		{
+			mes3.push(0);
+		}
+	}
+	let g = (mes3[0]+mes3[1]+mes3[2]+mes3[4])%2;
+	let b = (mes3[0]+mes3[1]+mes3[3]+mes3[5])%2;
+	let r = (mes3[0]+mes3[2]+mes3[3]+mes3[6])%2;
+	
+	let index = 7-(g*2*2+b*2+r*1);
+	if(index!=7)
+	{
+		n=mes3[4];
+		mes3[4]=mes3[3];
+		mes3[3]=n;
+		if(mes3[index]==1)
+		{
+			mes3[index]=0;
+		}
+		else
+		{
+			mes3[index]=1;
+		}
+	
+		n=mes3[4];
+		mes3[4]=mes3[3];
+		mes3[3]=n;
+	}
+	
+	
+	
+	document.getElementById('decodedMessage').value = mes3.join('');
+	if(index==7)
+	{
+		document.getElementById('placeOfIndex').textContent = "Ошибок нет";
+	}
+	else
+	{
+	var index1 = String(index+1);
+	document.getElementById('placeOfIndex').textContent = "Ошибка в бите под номером " + " " +index1;
+	}
+}
+	</script>
+</head>
+<body>
+	<h1>Hemming code</h1>
+	<p> <input type='text' id='inpMessage'> Type the message </p>
+	<p> <input type='button' value='code' onClick='code()'> </p>
+	<p> <input type='text' id='codedMessage'> Coded message </p>
+	<p> <input type='button' value='decode' onClick='decode()'> </p>
+	<p> <input type='text' id='decodedMessage'> Decoded message </p>
+	<p> <span id='placeOfIndex'> </span> </p>
+</body>
+</html>
